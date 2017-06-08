@@ -1,0 +1,6 @@
+# pip install -r requirement_pip.txt
+django
+djangorestframework
+django-filter
+django-cors-headers
+djangorestframework-jwt
