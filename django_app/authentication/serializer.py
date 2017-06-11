@@ -6,6 +6,7 @@ from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    company = serializers.CharField()
+    profile = serializers.CharField()
     email = serializers.EmailField()
+    username = serializers.CharField()
     password = serializers.CharField()

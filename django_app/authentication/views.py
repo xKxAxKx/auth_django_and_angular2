@@ -23,9 +23,6 @@ class AuthRegister(APIView):
         user = authenticate(**serializer.data)
         if not user:
             raise AuthenticationFailed()
-        # 以下2行が今回のカスタマイズ部分
-        if user.company != serializer.data['company']:
-            raise AuthenticationFailed()
         payload = jwt_payload_handler(user)
         return Response({
             'token': jwt_encode_handler(payload),
