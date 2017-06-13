@@ -24,8 +24,8 @@ class AuthRegister(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserListView(APIView):
-    permission_classes = (permissions.AllowAny,)
     serializer_class = AccountSerializer
+    permission_classes = (permissions.AllowAny,)
 
     def get(self, request, format=None):
         queryset = Account.objects.all()

@@ -15,7 +15,4 @@ export class MainComponent {
     private router: Router,
   ){}
 
-  ngOnInit(): void{
-    this.testVar = "hoge";
-  }
 }

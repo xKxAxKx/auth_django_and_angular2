@@ -6,15 +6,19 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule }   from './app-routing.module';
 
+import { AuthComponent }      from './components/auth.component';
+import { AuthService } from './services/auth.service';
 import { MainComponent }      from './components/main.component';
 import { MainService } from './services/main.service';
-import { HeaderComponent }      from './components/header.component';
+import { HeaderComponent }  from './components/header.component';
+import { AuthGuard }      from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    HeaderComponent
+    AuthComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,9 @@ import { HeaderComponent }      from './components/header.component';
     AppRoutingModule
   ],
   providers: [
-    MainService
+    MainService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
