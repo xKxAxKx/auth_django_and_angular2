@@ -2,7 +2,39 @@
   <div class="center">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
-        ログイン画面
+        <h3>Login</h3>
+        <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
+          <div cclass="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <input
+              type="text"
+              class="form-control login-form"
+              placeholder="email"
+              name="email"
+              [(ngModel)]="loginuser.email"
+              #email="ngModel"
+              required
+            />
+          </div>
+          <br>
+          <div class="lg-Input">
+            <input
+              type="password"
+              class="form-control login-form"
+              placeholder="password"
+              name="password"
+              [(ngModel)]="loginuser.password"
+              #password="ngModel"
+              required
+            />
+          </div>
+          <br>
+          <button class="btn btn-success pull-right login-form">
+            Login
+          </button>
+        </form>
+        <div *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
       </div>
     <div>
   </div>

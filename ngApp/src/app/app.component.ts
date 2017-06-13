@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './services/auth.service';
+
 @Component({
   selector: 'app-root',
   template: `
@@ -9,9 +11,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor(
+    private authService: AuthService,
   ){}
 
   ngOnInit() {
+    if (localStorage.getItem('auth_angular_user')) {
+      this.authService.userLogin = true;
+    }
   }
 
 }

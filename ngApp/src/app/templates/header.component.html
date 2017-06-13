@@ -2,7 +2,10 @@
   <div class="container">
     <a href="/" class="title navbar-brand">Authentication Sample</a>
     <ul class="nav navbar-nav navbar-right">
-      <li>
+      <li *ngIf="authService.userLogin">
+        <a (click)="authService.logout()" class="cursor_pointer">Logout</a>
+      </li>
+      <li *ngIf="!authService.userLogin">
         <a (click)="authService.signUp = false" class="cursor_pointer">Login</a>
       </li>
     </ul>

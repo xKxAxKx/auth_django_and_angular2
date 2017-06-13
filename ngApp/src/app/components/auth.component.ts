@@ -19,11 +19,20 @@ export class AuthComponent {
   ){}
 
   ngOnInit() {
-
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.checklogin();
   }
 
   login() {
-
+    this.authService.login(this.loginuser.email, this.loginuser.password)
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.errorMessage = "メールアドレスかかパスワードが間違っています";
+        }
+      );
   }
 
 
@@ -40,7 +49,9 @@ export class AuthComponent {
   }
 
   checklogin(): void {
-
+    if(localStorage.getItem('auth_angular_user')) {
+      this.router.navigate(['/']);
+    }
   }
 
 }
