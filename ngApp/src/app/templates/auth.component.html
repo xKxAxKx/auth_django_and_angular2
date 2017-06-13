@@ -1,10 +1,10 @@
 <div class="container">
   <div class="center">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
+      <div *ngIf="!authService.signUp" class="col-sm-8 col-sm-offset-2">
         <h3>Login</h3>
         <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
-          <div cclass="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
             <input
               type="text"
               class="form-control login-form"
@@ -15,7 +15,6 @@
               required
             />
           </div>
-          <br>
           <div class="lg-Input">
             <input
               type="password"
@@ -30,6 +29,66 @@
           <br>
           <button class="btn btn-success pull-right login-form">
             Login
+          </button>
+        </form>
+        <div *ngIf="errorMessage">
+          {{errorMessage}}
+        </div>
+      </div>
+
+      <div *ngIf="authService.signUp" class="col-sm-8 col-sm-offset-2">
+        <h3>SignUp</h3>
+        <form name="form" (ngSubmit)="signup()" #f="ngForm" novalidate>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label>email</label>
+            <input
+              type="text"
+              class="form-control login-form"
+              placeholder="email"
+              name="email"
+              [(ngModel)]="signup_user.email"
+              #email="ngModel"
+              required
+            />
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label>ユーザ名</label>
+            <input
+              type="text"
+              class="form-control login-form"
+              placeholder="username"
+              name="username"
+              [(ngModel)]="signup_user.username"
+              #username="ngModel"
+              required
+            />
+          </div>
+          <div class="lg-Input">
+            <label>パスワード</label>
+            <input
+              type="password"
+              class="form-control login-form"
+              placeholder="password"
+              name="password"
+              [(ngModel)]="signup_user.password"
+              #password="ngModel"
+              required
+            />
+          </div>
+          <div class="lg-Input">
+            <label>プロフィール</label>
+            <textarea
+              class="form-control login-form"
+              placeholder="profile"
+              name="profile"
+              [(ngModel)]="signup_user.profile"
+              #profile="ngModel"
+              required
+            ></textarea>
+          </div>
+          <br>
+          <button class="btn btn-success pull-right login-form">
+            SignUP
           </button>
         </form>
         <div *ngIf="errorMessage">

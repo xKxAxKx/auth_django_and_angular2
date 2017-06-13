@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthComponent {
   loginuser: any = {};
+  signup_user: any = {};
   returnUrl: string;
   errorMessage: string;
 
@@ -30,14 +31,22 @@ export class AuthComponent {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.errorMessage = "メールアドレスかかパスワードが間違っています";
+          this.errorMessage = "メールアドレスかパスワードが間違っています";
         }
       );
   }
 
 
-  signup(): void{
-
+  signup() {
+    this.authService.signup(this.signup_user.email, this.signup_user.password, this.signup_user.username, this.signup_user.profile)
+      .subscribe(
+        data => {
+          this.router.navigate(['/auth']);
+        },
+        error => {
+          this.errorMessage = "ユーザ作成が失敗しました";
+        }
+      );
   }
 
   deleteUser(): void{

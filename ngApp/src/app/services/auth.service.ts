@@ -8,7 +8,8 @@ import 'rxjs/add/operator/map'
 export class AuthService {
   userLogin: boolean = false;
   signUp: boolean = false;
-  private AuthUrl = `http://127.0.0.1:8000/login/`
+  private LoginUrl = `http://127.0.0.1:8000/login/`
+  private RegisterUrl = `http://127.0.0.1:8000/api/user/register/`
 
   constructor(
     private http: Http,
@@ -17,7 +18,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http
-      .post(this.AuthUrl, {email: email, password: password})
+      .post(this.LoginUrl, {email: email, password: password})
       .map((response: Response) =>{
         let user = response.json();
         if (user && user.token){
@@ -33,8 +34,20 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
-  signup(username: string, password:string, email:string, profile?:string) {
-    console.log("test");
+  signup(email: string, password:string, username:string, profile?:string) {
+    return this.http
+      .post(
+        this.RegisterUrl,
+        {email: email, password: password, username: username, profile: profile}
+      );
+    // .subscribe(
+    //   (res) => {
+    //     this.router.navigate(['/auth']);
+    //   },
+    //   (err) => {
+    //     console.log("error!");
+    //   }
+    // );
   }
 
   changeProfile() {
@@ -47,5 +60,11 @@ export class AuthService {
 
   deleteUser() {
     console.log("test");
+  }
+
+  checkLogin() {
+    if (localStorage.getItem('auth_angular_user')) {
+      this.userLogin = true;
+    }
   }
 }

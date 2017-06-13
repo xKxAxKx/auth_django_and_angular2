@@ -5,8 +5,11 @@
       <li *ngIf="authService.userLogin">
         <a (click)="authService.logout()" class="cursor_pointer">Logout</a>
       </li>
-      <li *ngIf="!authService.userLogin">
+      <li *ngIf="!authService.userLogin && authService.signUp">
         <a (click)="authService.signUp = false" class="cursor_pointer">Login</a>
+      </li>
+      <li *ngIf="!authService.userLogin && !authService.signUp">
+        <a (click)="authService.signUp = true" class="cursor_pointer">Signup</a>
       </li>
     </ul>
   </div>

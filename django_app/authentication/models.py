@@ -8,21 +8,20 @@ from django.utils import timezone
 
 
 class AccountManager(BaseUserManager):
-    def create_user(self, username, email, password, **extra_fields):
+    def create_user(**kwargs):
         now = timezone.now()
-        if not email:
+        if not kwargs['email']:
             raise ValueError('Users must have an email address.')
-        email = AccountManager.normalize_email(email)
+        email = AccountManager.normalize_email(kwargs['email'])
         user = self.model(
-            username=username,
-            email=email,
+            username=kwargs['username'],
+            email=kwargs['email'],
             is_active=True,
             last_login=now,
-            date_joined=now,
-            **extra_fields
+            date_joined=now
         )
 
-        user.set_password(password)
+        user.set_password(kwargs.password)
         user.save(using=self._db)
         return user
 

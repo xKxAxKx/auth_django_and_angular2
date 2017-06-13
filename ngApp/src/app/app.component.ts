@@ -6,6 +6,11 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   template: `
     <header header></header>
+    <!--
+    <div class="container">
+      <div class="alert alert-success" role="alert">{{ alertMessage }}</div>
+    </div>
+    -->
     <router-outlet></router-outlet>
   `,
 })
@@ -15,9 +20,7 @@ export class AppComponent {
   ){}
 
   ngOnInit() {
-    if (localStorage.getItem('auth_angular_user')) {
-      this.authService.userLogin = true;
-    }
+    this.authService.checkLogin();
   }
 
 }
