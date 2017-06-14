@@ -18,4 +18,8 @@ export class HeaderComponent {
   ngOnInit() {
 
   }
+
+  getUserInfo() {
+    console.log("getuser")
+  }
 }

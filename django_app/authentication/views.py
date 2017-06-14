@@ -38,3 +38,14 @@ class AuthRegister(generics.CreateAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AuthRetrieveUpdateView(generics.RetrieveUpdateAPIView):
+    permission_classes = (permissions.AllowAny, )
+    serializer_class = AccountSerializer
+
+    def get(self, request):
+        serializer = AccountSerializer(request.user)
+
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -9,8 +9,10 @@ export class AuthService {
   LoginToken: any = {};
   userLogin: boolean = false;
   signUp: boolean = false;
+  userInfo: any = {};
   private LoginUrl = `http://127.0.0.1:8000/login/`
   private RegisterUrl = `http://127.0.0.1:8000/api/user/register/`
+  private RetrieveUpdateUrl = `http://127.0.0.1:8000/api/user/mypage/`
 
   constructor(
     private http: Http,
@@ -45,7 +47,11 @@ export class AuthService {
       );
   }
 
-  changeProfile() {
+  getUserInfo() {
+    console.log("test");
+  }
+
+  changeUserInfo() {
     console.log("test");
   }
 
@@ -61,6 +67,7 @@ export class AuthService {
     if (localStorage.getItem('auth_angular_user')) {
       this.userLogin = true;
       this.LoginToken = localStorage.getItem('auth_angular_user');
+      console.log(this.LoginToken);
     }
   }
 }
