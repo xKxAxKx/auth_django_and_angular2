@@ -13,10 +13,10 @@ class AccountManager(BaseUserManager):
         if not request_data['email']:
             raise ValueError('Users must have an email address.')
 
-        if request_data['profile']:
+        if request_data.get('profile'):
             profile = request_data['profile']
         else:
-            profile = None
+            profile = ""
 
         user = self.model(
             username=request_data['username'],
