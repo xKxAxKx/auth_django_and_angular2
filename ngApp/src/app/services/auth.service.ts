@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthService {
+  LoginToken: any = {};
   userLogin: boolean = false;
   signUp: boolean = false;
   private LoginUrl = `http://127.0.0.1:8000/login/`
@@ -24,6 +25,7 @@ export class AuthService {
         if (user && user.token){
           localStorage.setItem('auth_angular_user', JSON.stringify(user));
           this.userLogin = true;
+          this.LoginToken = localStorage.getItem('auth_angular_user');
         }
       });
   }
@@ -31,6 +33,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('auth_angular_user');
     this.userLogin = false;
+    this.LoginToken = {};
     this.router.navigate(['/auth']);
   }
 
@@ -57,6 +60,7 @@ export class AuthService {
   checkLogin() {
     if (localStorage.getItem('auth_angular_user')) {
       this.userLogin = true;
+      this.LoginToken = localStorage.getItem('auth_angular_user');
     }
   }
 }
