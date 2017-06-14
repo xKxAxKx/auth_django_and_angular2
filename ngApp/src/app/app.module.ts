@@ -12,6 +12,7 @@ import { MainComponent }      from './components/main.component';
 import { MainService } from './services/main.service';
 import { HeaderComponent }  from './components/header.component';
 import { AuthGuard }      from './guards/auth.guard';
+import { MypageComponent }      from './components/mypage.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AuthGuard }      from './guards/auth.guard';
     MainComponent,
     AuthComponent,
     HeaderComponent,
+    MypageComponent,
   ],
   imports: [
     BrowserModule,

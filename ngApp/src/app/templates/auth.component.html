@@ -2,6 +2,12 @@
   <div class="center">
     <div class="row">
       <div *ngIf="!authService.signUp" class="col-sm-8 col-sm-offset-2">
+        <div *ngIf="loginErrorMessage" class="alert alert-danger">
+          {{loginErrorMessage}}
+        </div>
+        <div *ngIf="signUpValidMessage" class="alert alert-success">
+          {{signUpValidMessage}}
+        </div>
         <h3>Login</h3>
         <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
@@ -15,7 +21,7 @@
               required
             />
           </div>
-          <div class="lg-Input">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <input
               type="password"
               class="form-control login-form"
@@ -26,17 +32,17 @@
               required
             />
           </div>
-          <br>
           <button class="btn btn-success pull-right login-form">
             Login
           </button>
         </form>
-        <div *ngIf="errorMessage">
-          {{errorMessage}}
-        </div>
       </div>
 
+
       <div *ngIf="authService.signUp" class="col-sm-8 col-sm-offset-2">
+        <div *ngIf="signUpErrorMessage" class="alert alert-danger">
+          {{signUpErrorMessage}}
+        </div>
         <h3>SignUp</h3>
         <form name="form" (ngSubmit)="signup()" #f="ngForm" novalidate>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
@@ -51,7 +57,7 @@
               required
             />
           </div>
-          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label>ユーザ名</label>
             <input
               type="text"
@@ -63,7 +69,7 @@
               required
             />
           </div>
-          <div class="lg-Input">
+          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label>パスワード</label>
             <input
               type="password"
@@ -75,7 +81,7 @@
               required
             />
           </div>
-          <div class="lg-Input">
+          <div class="form-group">
             <label>プロフィール</label>
             <textarea
               class="form-control login-form"
@@ -83,17 +89,12 @@
               name="profile"
               [(ngModel)]="signup_user.profile"
               #profile="ngModel"
-              required
             ></textarea>
           </div>
-          <br>
           <button class="btn btn-success pull-right login-form">
             SignUP
           </button>
         </form>
-        <div *ngIf="errorMessage">
-          {{errorMessage}}
-        </div>
       </div>
     <div>
   </div>

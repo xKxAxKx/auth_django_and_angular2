@@ -5,13 +5,16 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'auth',
-  templateUrl: '../templates/auth.component.html'
+  templateUrl: '../templates/auth.component.html',
+  styleUrls: ['../static/auth.component.css']
 })
 export class AuthComponent {
   loginuser: any = {};
   signup_user: any = {};
   returnUrl: string;
-  errorMessage: string;
+  loginErrorMessage: string;
+  signUpErrorMessage: string;
+  signUpValidMessage: string;
 
   constructor(
     private authService: AuthService,
@@ -31,7 +34,8 @@ export class AuthComponent {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.errorMessage = "メールアドレスかパスワードが間違っています";
+          this.signUpValidMessage = null;
+          this.loginErrorMessage = "メールアドレスかパスワードが正しくありません";
         }
       );
   }
@@ -42,9 +46,14 @@ export class AuthComponent {
       .subscribe(
         data => {
           this.router.navigate(['/auth']);
+          this.signup_user = {};
+          this.authService.signUp = false;
+          this.signUpErrorMessage = null;
+          this.loginErrorMessage = null;
+          this.signUpValidMessage = "ユーザ作成が完了しました"
         },
         error => {
-          this.errorMessage = "ユーザ作成が失敗しました";
+          this.signUpErrorMessage = "ユーザ作成が失敗しました";
         }
       );
   }

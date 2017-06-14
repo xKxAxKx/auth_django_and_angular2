@@ -1,21 +1,29 @@
 import { Component,Input } from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
+
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'header',
-  templateUrl: '../templates/header.component.html',
-  styleUrls: ['../static/header.component.css']
+  selector: 'mypage',
+  templateUrl: '../templates/mypage.component.html',
+  styleUrls: ['../static/mypage.component.css']
 })
-export class HeaderComponent {
+export class MypageComponent {
   constructor(
     private authService: AuthService,
+    private route: ActivatedRoute,
     private router: Router,
-  ){
+  ){}
+
+  ngOnInit() {
 
   }
 
-  ngOnInit() {
+  editProfile() {
+
+  }
+
+  changePassword() {
 
   }
 }

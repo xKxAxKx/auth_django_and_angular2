@@ -40,14 +40,6 @@ export class AuthService {
         this.RegisterUrl,
         {email: email, password: password, username: username, profile: profile}
       );
-    // .subscribe(
-    //   (res) => {
-    //     this.router.navigate(['/auth']);
-    //   },
-    //   (err) => {
-    //     console.log("error!");
-    //   }
-    // );
   }
 
   changeProfile() {
