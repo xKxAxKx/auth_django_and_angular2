@@ -5,9 +5,9 @@ from .models import Account, AccountManager
 
 
 class AccountSerializer(serializers.ModelSerializer):
-    def create(self, validated_data):
-        return AccountManager.create_user(**validated_data)
-
     class Meta:
         model = Account
         fields = ('id', 'username', 'email', 'profile', 'password')
+
+    def create(self, validated_data):
+        return Account.objects.create_user(request_data=validated_data)
