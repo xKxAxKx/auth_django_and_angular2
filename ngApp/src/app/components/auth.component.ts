@@ -11,7 +11,6 @@ import { AuthService } from '../services/auth.service';
 export class AuthComponent {
   loginuser: any = {};
   signup_user: any = {};
-  userInfo: any = {};
   returnUrl: string;
   loginErrorMessage: string;
   signUpErrorMessage: string;

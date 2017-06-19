@@ -52,8 +52,7 @@ export class AuthService {
       .get(this.RetrieveUpdateUrl, this.jwt())
       .subscribe(
         res => {
-          this.userInfo = res;
-          console.log(this.userInfo);
+          this.userInfo = res.json();
         },
         error => {
           console.log("未ログイン");
@@ -84,7 +83,6 @@ export class AuthService {
   jwt() {
     if (this.LoginToken) {
         let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'JWT ' + this.LoginToken.token });
-        console.log(headers);
         return new RequestOptions({ headers: headers });
     }
   }

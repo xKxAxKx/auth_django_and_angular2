@@ -9,6 +9,8 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['../static/mypage.component.css']
 })
 export class MypageComponent {
+  editUserInfo: any = {};
+
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -16,7 +18,7 @@ export class MypageComponent {
   ){}
 
   ngOnInit() {
-
+    this.editUserInfo = this.authService.userInfo;
   }
 
   editProfile() {
