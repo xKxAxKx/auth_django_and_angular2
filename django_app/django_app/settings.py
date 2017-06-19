@@ -136,6 +136,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 JWT_AUTH = {
     # トークンの期限をここでは無効にしてみる
     'JWT_VERIFY_EXPIRATION': False,
+    'JWT_AUTH_HEADER_PREFIX': 'JWT',
 }
 
 REST_FRAMEWORK = {

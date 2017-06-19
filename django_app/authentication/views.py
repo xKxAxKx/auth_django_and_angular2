@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import authentication, permissions, generics
 from rest_framework_jwt.settings import api_settings
-from rest_framework.generics import GenericAPIView
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
 from django.db import transaction
@@ -39,13 +38,15 @@ class AuthRegister(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class AuthRetrieveUpdateView(generics.RetrieveUpdateAPIView):
-    permission_classes = (permissions.AllowAny, )
+class AuthRetrieveUpdateView(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
-    def get(self, request):
-        serializer = AccountSerializer(request.user)
-
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request, format=None):
+        return Response(data={
+            'username': request.user.username,
+            'email': request.user.email,
+            'profile': request.user.profile,
+            },
+            status=status.HTTP_200_OK)
