@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
@@ -47,8 +47,18 @@ export class AuthService {
       );
   }
 
-  getUserInfo() {
-    console.log("test");
+  fetchUserInfo() {
+    return this.http
+      .get(this.RetrieveUpdateUrl, this.jwt())
+      .subscribe(
+        res => {
+          this.userInfo = res;
+          console.log(this.userInfo);
+        },
+        error => {
+          console.log("未ログイン");
+        }
+      );
   }
 
   changeUserInfo() {
@@ -66,8 +76,16 @@ export class AuthService {
   checkLogin() {
     if (localStorage.getItem('auth_angular_user')) {
       this.userLogin = true;
-      this.LoginToken = localStorage.getItem('auth_angular_user');
-      console.log(this.LoginToken);
+      this.LoginToken = JSON.parse(localStorage.getItem('auth_angular_user'));
+      this.fetchUserInfo();
+    }
+  }
+
+  jwt() {
+    if (this.LoginToken) {
+        let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'JWT ' + this.LoginToken.token });
+        console.log(headers);
+        return new RequestOptions({ headers: headers });
     }
   }
 }

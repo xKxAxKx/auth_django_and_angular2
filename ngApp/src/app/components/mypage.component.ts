@@ -26,4 +26,8 @@ export class MypageComponent {
   changePassword() {
 
   }
+
+  deleteUser(){
+
+  }
 }
