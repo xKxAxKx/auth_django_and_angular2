@@ -1,9 +1,9 @@
 <nav class="navbar navbar-default">
   <div class="container">
-    <a href="/" class="title navbar-brand">Authentication Sample</a>
+    <a routerLink="/" class="title navbar-brand">Authentication Sample</a>
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="authService.userLogin">
-        <a href="/mypage" class="cursor_pointer">{{authService.userInfo.email}}</a>
+        <a routerLink="/mypage" class="cursor_pointer">{{authService.userInfo.email}}</a>
       </li>
       <li *ngIf="authService.userLogin">
         <a (click)="authService.logout()" class="cursor_pointer">Logout</a>

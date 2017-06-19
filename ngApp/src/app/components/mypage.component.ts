@@ -10,6 +10,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class MypageComponent {
   editUserInfo: any = {};
+  editUserEmail: string;
+  editUserName: string;
+  edtiUserProfile: string;
 
   constructor(
     private authService: AuthService,
@@ -18,10 +21,12 @@ export class MypageComponent {
   ){}
 
   ngOnInit() {
-    this.editUserInfo = this.authService.userInfo;
+    setTimeout(() => {
+      this.setFormData();
+    }, 500);
   }
 
-  editProfile() {
+  updateUserInfo() {
 
   }
 
@@ -31,5 +36,11 @@ export class MypageComponent {
 
   deleteUser(){
 
+  }
+
+  setFormData() {
+    this.editUserEmail = this.authService.userInfo.email;
+    this.editUserName = this.authService.userInfo.username;
+    this.edtiUserProfile = this.authService.userInfo.profile;
   }
 }
