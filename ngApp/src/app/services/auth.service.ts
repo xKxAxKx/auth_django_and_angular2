@@ -61,12 +61,20 @@ export class AuthService {
       );
   }
 
-  updateUserInfo(userInfo) {
-    console.log(userInfo);
+  updateUserInfo(userUpdateInfo) {
+    console.log(userUpdateInfo);
     return this.http
       .put(this.RetrieveUpdateUrl,
-        userInfo,
+        userUpdateInfo,
         this.jwt()
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        error => {
+          console.log(error);
+        }
       );
   }
 

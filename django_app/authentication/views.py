@@ -51,5 +51,5 @@ class AuthRetrieveUpdateView(generics.GenericAPIView):
             },
             status=status.HTTP_200_OK)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    def put(self, request, format=None):
+        return True;
