@@ -26,8 +26,8 @@ export class AuthService {
         let user = response.json();
         if (user && user.token){
           localStorage.setItem('auth_angular_user', JSON.stringify(user));
-          this.userLogin = true;
           this.LoginToken = localStorage.getItem('auth_angular_user');
+          this.checkLogin();
         }
       });
   }
@@ -36,6 +36,7 @@ export class AuthService {
     localStorage.removeItem('auth_angular_user');
     this.userLogin = false;
     this.LoginToken = {};
+    this.userInfo = {};
     this.router.navigate(['/auth']);
   }
 
@@ -49,7 +50,7 @@ export class AuthService {
 
   fetchUserInfo() {
     return this.http
-      .get(this.RetrieveUpdateUrl, this.jwt())
+      .get(this.RetrieveUpdateUrl, this.jwt())　
       .subscribe(
         res => {
           this.userInfo = res.json();
@@ -60,8 +61,13 @@ export class AuthService {
       );
   }
 
-  changeUserInfo() {
-    console.log("test");
+  updateUserInfo(userInfo) {
+    console.log(userInfo);
+    return this.http
+      .put(this.RetrieveUpdateUrl,
+        userInfo,
+        this.jwt()
+      );
   }
 
   changePassword() {

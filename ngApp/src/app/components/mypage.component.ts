@@ -27,7 +27,11 @@ export class MypageComponent {
   }
 
   updateUserInfo() {
-
+    this.authService.updateUserInfo({
+      email: this.editUserEmail,
+      username: this.editUserName,
+      profile: this.edtiUserProfile
+    });
   }
 
   changePassword() {
