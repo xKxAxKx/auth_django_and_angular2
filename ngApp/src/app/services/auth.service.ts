@@ -12,7 +12,8 @@ export class AuthService {
   userInfo: any = {};
   private LoginUrl = `http://127.0.0.1:8000/login/`
   private RegisterUrl = `http://127.0.0.1:8000/api/user/register/`
-  private RetrieveUpdateUrl = `http://127.0.0.1:8000/api/user/mypage/`
+  private FetchUserUrl = `http://127.0.0.1:8000/api/user/mypage/`
+  private UpdateUserUrl = `http://127.0.0.1:8000/api/user/auth_update/`
 
   constructor(
     private http: Http,
@@ -50,7 +51,7 @@ export class AuthService {
 
   fetchUserInfo() {
     return this.http
-      .get(this.RetrieveUpdateUrl, this.jwt())　
+      .get(this.FetchUserUrl, this.jwt())　
       .subscribe(
         res => {
           this.userInfo = res.json();
@@ -62,9 +63,8 @@ export class AuthService {
   }
 
   updateUserInfo(userUpdateInfo) {
-    console.log(userUpdateInfo);
     return this.http
-      .put(this.RetrieveUpdateUrl,
+      .put(this.UpdateUserUrl,
         userUpdateInfo,
         this.jwt()
       )
@@ -73,7 +73,7 @@ export class AuthService {
           console.log(res);
         },
         error => {
-          console.log(error);
+          console.error(error);
         }
       );
   }

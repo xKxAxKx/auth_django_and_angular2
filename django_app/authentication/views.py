@@ -11,19 +11,7 @@ from rest_framework.views import APIView
 from .serializer import AccountSerializer
 from .models import Account, AccountManager
 
-
-class UserListView(APIView):
-    serializer_class = AccountSerializer
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        queryset = Account.objects.all()
-        serializer = AccountSerializer(queryset, many=True, data=request.data)
-
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+import json
 
 class AuthRegister(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -38,7 +26,7 @@ class AuthRegister(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class AuthRetrieveUpdateView(generics.GenericAPIView):
+class AuthInfoGetView(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
@@ -51,5 +39,29 @@ class AuthRetrieveUpdateView(generics.GenericAPIView):
             },
             status=status.HTTP_200_OK)
 
-    def put(self, request, format=None):
-        return True;
+
+class AuthInfoUpdateView(generics.UpdateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = AccountSerializer
+    lookup_field = 'email'
+    queryset = Account.objects.all()
+
+    def get_object(self):
+        try:
+            instance = self.queryset.get(email=self.request.user)
+            return instance
+        except Account.DoesNotExist:
+            raise Http404
+
+# あとで消す
+class UserListView(APIView):
+    serializer_class = AccountSerializer
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        queryset = Account.objects.all()
+        serializer = AccountSerializer(queryset, many=True, data=request.data)
+
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
