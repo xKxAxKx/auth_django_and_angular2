@@ -11,8 +11,6 @@ from rest_framework.views import APIView
 from .serializer import AccountSerializer
 from .models import Account, AccountManager
 
-import json
-
 class AuthRegister(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
     queryset = Account.objects.all()
