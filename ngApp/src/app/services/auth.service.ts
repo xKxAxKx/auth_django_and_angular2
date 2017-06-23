@@ -14,6 +14,7 @@ export class AuthService {
   private RegisterUrl = `http://127.0.0.1:8000/api/user/register/`
   private FetchUserUrl = `http://127.0.0.1:8000/api/user/mypage/`
   private UpdateUserUrl = `http://127.0.0.1:8000/api/user/auth_update/`
+  private RefreshTokenUrl = `http://127.0.0.1:8000/token-refresh/`
 
   constructor(
     private http: Http,
@@ -23,7 +24,20 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post(this.LoginUrl, {email: email, password: password})
-      .map((response: Response) =>{
+      .map((response: Response) => {
+        let user = response.json();
+        if (user && user.token){
+          localStorage.setItem('auth_angular_user', JSON.stringify(user));
+          this.LoginToken = localStorage.getItem('auth_angular_user');
+          this.checkLogin();
+        }
+      });
+  }
+
+  tokenRefresh() {
+    return this.http
+      .post(this.RefreshTokenUrl, this.jwt())
+      .map((response: Response) => {
         let user = response.json();
         if (user && user.token){
           localStorage.setItem('auth_angular_user', JSON.stringify(user));
@@ -51,7 +65,7 @@ export class AuthService {
 
   fetchUserInfo() {
     return this.http
-      .get(this.FetchUserUrl, this.jwt())　
+      .get(this.FetchUserUrl, this.jwt())
       .subscribe(
         res => {
           this.userInfo = res.json();
@@ -70,7 +84,7 @@ export class AuthService {
       )
       .subscribe(
         res => {
-          console.log(res);
+          this.tokenRefresh();
         },
         error => {
           console.error(error);
@@ -91,6 +105,8 @@ export class AuthService {
       this.userLogin = true;
       this.LoginToken = JSON.parse(localStorage.getItem('auth_angular_user'));
       this.fetchUserInfo();
+    } else {
+      this.router.navigate(['/auth']);
     }
   }
 

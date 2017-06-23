@@ -58,15 +58,6 @@ export class AuthComponent {
       );
   }
 
-
-  deleteUser(): void{
-
-  }
-
-  editUser(): void{
-
-  }
-
   checklogin(): void {
     if(localStorage.getItem('auth_angular_user')) {
       this.router.navigate(['/']);
