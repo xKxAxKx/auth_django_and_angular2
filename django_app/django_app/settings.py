@@ -153,4 +153,5 @@ REST_FRAMEWORK = {
     ),
     'NON_FIELD_ERRORS_KEY': 'detail',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'JWT_ALLOW_REFRESH': True,
 }
