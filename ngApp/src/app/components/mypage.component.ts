@@ -56,7 +56,7 @@ export class MypageComponent {
 
   }
 
-  deleteUser(){
+  userDelete(){
 
   }
 

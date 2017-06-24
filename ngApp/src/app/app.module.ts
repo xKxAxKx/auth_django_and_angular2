@@ -13,6 +13,7 @@ import { MainService } from './services/main.service';
 import { HeaderComponent }  from './components/header.component';
 import { AuthGuard }      from './guards/auth.guard';
 import { MypageComponent }      from './components/mypage.component';
+import { UserDeleteComponent } from './components/user_delete.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MypageComponent }      from './components/mypage.component';
     AuthComponent,
     HeaderComponent,
     MypageComponent,
+    UserDeleteComponent,
   ],
   imports: [
     BrowserModule,

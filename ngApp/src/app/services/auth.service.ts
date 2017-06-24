@@ -71,7 +71,7 @@ export class AuthService {
           this.userInfo = res.json();
         },
         error => {
-          console.log("未ログイン");
+          console.log(error);
         }
       );
   }
@@ -104,8 +104,8 @@ export class AuthService {
 
   jwt() {
     if (this.LoginToken) {
-        let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'JWT ' + this.LoginToken.token });
-        return new RequestOptions({ headers: headers });
+      let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'JWT ' + this.LoginToken.token });
+      return new RequestOptions({ headers: headers });
     }
   }
 }
