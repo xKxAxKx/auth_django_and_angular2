@@ -51,6 +51,11 @@ class AuthInfoUpdateView(generics.UpdateAPIView):
         except Account.DoesNotExist:
             raise Http404
 
+class AuthInfoDeleteView(generics.DestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = AccountSerializer
+    queryset = Account.objects.all()
+
 # あとで消す
 class UserListView(APIView):
     serializer_class = AccountSerializer
