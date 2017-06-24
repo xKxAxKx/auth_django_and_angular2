@@ -18,11 +18,15 @@ export class UserDeleteComponent{
   ngOnInit() {
   }
 
-  userDelete() {
-    console.log("ユーザ削除するで")
-    // this.authService.userDelete()
-    //   .subscribe(
-    //     this.authService.logout();
-    //   );
+  userDelete(){
+    this.authService.deleteUser()
+    .subscribe(
+      data => {
+        this.authService.logout();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -15,6 +15,7 @@ export class AuthService {
   private FetchUserUrl = `http://127.0.0.1:8000/api/user/mypage/`
   private UpdateUserUrl = `http://127.0.0.1:8000/api/user/auth_update/`
   private RefreshTokenUrl = `http://127.0.0.1:8000/token-refresh/`
+  private DeleteUserUrl = `http://127.0.0.1:8000/api/user/delete/`
 
   constructor(
     private http: Http,
@@ -89,7 +90,8 @@ export class AuthService {
   }
 
   deleteUser() {
-    console.log("test");
+    return this.http
+      .delete(this.DeleteUserUrl, this.jwt());
   }
 
   checkLogin() {

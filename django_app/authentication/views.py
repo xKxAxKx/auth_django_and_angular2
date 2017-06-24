@@ -38,7 +38,7 @@ class AuthInfoGetView(generics.GenericAPIView):
             status=status.HTTP_200_OK)
 
 
-class AuthInfoUpdateView(generics.UpdateAPIView):
+class AuthInfoUpdateView(generics.UpdateAPIView, generics.DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AccountSerializer
     lookup_field = 'email'
@@ -54,7 +54,15 @@ class AuthInfoUpdateView(generics.UpdateAPIView):
 class AuthInfoDeleteView(generics.DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AccountSerializer
+    lookup_field = 'email'
     queryset = Account.objects.all()
+
+    def get_object(self):
+        try:
+            instance = self.queryset.get(email=self.request.user)
+            return instance
+        except Account.DoesNotExist:
+            raise Http404
 
 # あとで消す
 class UserListView(APIView):

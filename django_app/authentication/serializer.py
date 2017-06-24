@@ -13,10 +13,3 @@ class AccountSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Account.objects.create_user(request_data=validated_data)
-
-    # def update(self, instance, validated_data):
-    #     instance.username = validated_data.get('username', instance.username)
-    #     instance.email = validated_data.get('email', instance.email)
-    #     instance.profile = validated_data.get('profile', instance.profile)
-    #     instance = super().update(instance, validated_data)
-    #     return instance
