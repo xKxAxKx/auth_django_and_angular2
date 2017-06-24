@@ -13,6 +13,8 @@ export class MypageComponent {
   editUserEmail: string;
   editUserName: string;
   edtiUserProfile: string;
+  updateSuccessMessage: string;
+  updateErrorMessage: string;
 
   constructor(
     private authService: AuthService,
@@ -26,12 +28,28 @@ export class MypageComponent {
     }, 500);
   }
 
+  ngOnDestroy() {
+    this.updateSuccessMessage = null;
+    this.updateErrorMessage = null;
+  }
+
   updateUserInfo() {
     this.authService.updateUserInfo({
       email: this.editUserEmail,
       username: this.editUserName,
       profile: this.edtiUserProfile
-    });
+    })
+    .subscribe(
+      data => {
+        this.updateSuccessMessage = "ユーザ情報を更新しました";
+        this.updateErrorMessage = null;
+        this.authService.fetchUserInfo();
+      },
+      error => {
+        this.updateErrorMessage = "ユーザ情報更新に失敗しました";
+        this.updateSuccessMessage = null;
+      }
+    );
   }
 
   changePassword() {

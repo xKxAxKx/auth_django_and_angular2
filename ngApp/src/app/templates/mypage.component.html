@@ -2,6 +2,12 @@
   <div class="center">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2">
+        <div *ngIf="updateSuccessMessage" class="alert alert-success">
+          {{updateSuccessMessage}}
+        </div>
+        <div *ngIf="updateErrorMessage" class="alert alert-danger">
+          {{updateErrorMessage}}
+        </div>
         <h3>MyPage</h3>
         <form name="form" (ngSubmit)="updateUserInfo()" #f="ngForm" novalidate>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">

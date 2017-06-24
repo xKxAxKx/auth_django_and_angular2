@@ -81,14 +81,6 @@ export class AuthService {
       .put(this.UpdateUserUrl,
         userUpdateInfo,
         this.jwt()
-      )
-      .subscribe(
-        res => {
-          this.tokenRefresh();
-        },
-        error => {
-          console.error(error);
-        }
       );
   }
 
