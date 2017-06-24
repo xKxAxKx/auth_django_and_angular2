@@ -52,14 +52,6 @@ export class MypageComponent {
     );
   }
 
-  changePassword() {
-
-  }
-
-  userDelete(){
-
-  }
-
   setFormData() {
     this.editUserEmail = this.authService.userInfo.email;
     this.editUserName = this.authService.userInfo.username;
