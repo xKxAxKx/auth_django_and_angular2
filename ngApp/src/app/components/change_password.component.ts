@@ -10,6 +10,8 @@ import { AuthService } from '../services/auth.service';
 export class ChangePasswordComponent{
   changePasswordSuccessMessage: string;
   changePasswordErrorMessage: string;
+  oldPassword: string;
+  newPassword: string;
 
   constructor(
     private authService: AuthService,
@@ -26,16 +28,31 @@ export class ChangePasswordComponent{
   }
 
   changePassword(){
-    this.authService.deleteUser()
+    this.authService.checkPassword(
+      {email: this.authService.userInfo.email, password: this.oldPassword}
+    )
     .subscribe(
-      data => {
-        this.changePasswordSuccessMessage = "パスワードを更新しました";
-        this.changePasswordErrorMessage = null;
+      res => {
+        this.authService.updateUserInfo({
+          email: this.authService.userInfo.email,
+          password: this.newPassword,
+          username: this.authService.userInfo.username,
+          profile: this.authService.userInfo.profile,
+        })
+        .subscribe(
+          res => {
+            this.changePasswordSuccessMessage = "パスワードを更新しました";
+            this.changePasswordErrorMessage = null;
+          },
+          error => {
+            this.changePasswordErrorMessage = "パスワード更新に失敗しました";
+            this.changePasswordSuccessMessage = null;
+          }
+        )
       },
-      error => {
-        this.changePasswordErrorMessage = "パスワードの更新に失敗しました"
+      error =>{
+        this.changePasswordErrorMessage = "パスワード更新に失敗しました";
         this.changePasswordSuccessMessage = null;
-        console.log(error);
       }
     );
   }

@@ -85,8 +85,9 @@ export class AuthService {
       );
   }
 
-  changePassword() {
-    console.log("test");
+  checkPassword(oldUserInfo) {
+    return this.http
+      .post(this.LoginUrl, oldUserInfo);
   }
 
   deleteUser() {
