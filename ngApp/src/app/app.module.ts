@@ -14,6 +14,7 @@ import { HeaderComponent }  from './components/header.component';
 import { AuthGuard }      from './guards/auth.guard';
 import { MypageComponent }      from './components/mypage.component';
 import { UserDeleteComponent } from './components/user_delete.component';
+import { ChangePasswordComponent } from './components/change_password.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { UserDeleteComponent } from './components/user_delete.component';
     HeaderComponent,
     MypageComponent,
     UserDeleteComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
