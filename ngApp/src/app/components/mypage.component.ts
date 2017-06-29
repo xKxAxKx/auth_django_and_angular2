@@ -9,12 +9,16 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['../static/mypage.component.css']
 })
 export class MypageComponent {
-  editUserInfo: any = {};
-  editUserEmail: string;
-  editUserName: string;
+  editUserEmail: string = '';
+  editUserName: string = '';
   edtiUserProfile: string;
   updateSuccessMessage: string;
   updateErrorMessage: string;
+
+  // パスワードが入力されているか
+  get isAbleChangeUserInfo(): boolean {
+    return this.editUserEmail.length > 0 && this.editUserName.length > 0;
+  }
 
   constructor(
     private authService: AuthService,
@@ -43,7 +47,7 @@ export class MypageComponent {
       data => {
         this.updateSuccessMessage = "ユーザ情報を更新しました";
         this.updateErrorMessage = null;
-        this.authService.fetchUserInfo();
+        this.authService.userInfo;
       },
       error => {
         this.updateErrorMessage = "ユーザ情報更新に失敗しました";
