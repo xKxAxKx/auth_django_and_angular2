@@ -43,6 +43,8 @@ export class ChangePasswordComponent{
           res => {
             this.changePasswordSuccessMessage = "パスワードを更新しました";
             this.changePasswordErrorMessage = null;
+            this.oldPassword = null;
+            this.newPassword = null;
           },
           error => {
             this.changePasswordErrorMessage = "パスワード更新に失敗しました";
