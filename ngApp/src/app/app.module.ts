@@ -15,7 +15,6 @@ import { AuthGuard }      from './guards/auth.guard';
 import { MypageComponent }      from './components/mypage.component';
 import { UserDeleteComponent } from './components/user_delete.component';
 import { ChangePasswordComponent } from './components/change_password.component';
-import { ResetPasswordComponent } from './components/reset_password.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { ResetPasswordComponent } from './components/reset_password.component';
     MypageComponent,
     UserDeleteComponent,
     ChangePasswordComponent,
-    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

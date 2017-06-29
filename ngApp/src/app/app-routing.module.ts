@@ -6,7 +6,6 @@ import { AuthComponent }      from './components/auth.component';
 import { MypageComponent }      from './components/mypage.component';
 import { UserDeleteComponent } from './components/user_delete.component';
 import { ChangePasswordComponent } from './components/change_password.component';
-import { ResetPasswordComponent } from './components/reset_password.component';
 import { AuthGuard }      from './guards/auth.guard';
 
 const routes: Routes = [
@@ -15,7 +14,6 @@ const routes: Routes = [
   { path: 'mypage', component: MypageComponent },
   { path: 'user_delete', component: UserDeleteComponent },
   { path: 'change_password', component: ChangePasswordComponent },
-  { path: 'reset_password', component: ResetPasswordComponent }
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],

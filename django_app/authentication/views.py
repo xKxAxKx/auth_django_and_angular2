@@ -40,7 +40,7 @@ class AuthInfoGetView(generics.GenericAPIView):
             },
             status=status.HTTP_200_OK)
 
-# ユーザ情報更新のView(POST)
+# ユーザ情報更新のView(PUT)
 class AuthInfoUpdateView(generics.UpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AccountSerializer
@@ -67,16 +67,3 @@ class AuthInfoDeleteView(generics.DestroyAPIView):
             return instance
         except Account.DoesNotExist:
             raise Http404
-
-# あとで消す
-class UserListView(APIView):
-    serializer_class = AccountSerializer
-    permission_classes = (permissions.AllowAny,)
-
-    def get(self, request, format=None):
-        queryset = Account.objects.all()
-        serializer = AccountSerializer(queryset, many=True, data=request.data)
-
-        if serializer.is_valid():
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
