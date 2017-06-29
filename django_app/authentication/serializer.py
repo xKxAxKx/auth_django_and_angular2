@@ -18,5 +18,4 @@ class AccountSerializer(serializers.ModelSerializer):
         if 'password' in validate_data:
             instance.set_password(validate_data['password'])
         instance.save()
-        instance = super().update(instance, validate_data)
         return instance
