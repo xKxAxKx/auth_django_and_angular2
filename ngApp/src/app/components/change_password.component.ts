@@ -10,8 +10,13 @@ import { AuthService } from '../services/auth.service';
 export class ChangePasswordComponent{
   changePasswordSuccessMessage: string;
   changePasswordErrorMessage: string;
-  oldPassword: string;
-  newPassword: string;
+  oldPassword: string = '';
+  newPassword: string = '';
+
+  // パスワードが入力されているか
+  get isAbleChangePassword(): boolean {
+    return this.oldPassword.length > 0 && this.newPassword.length > 0;
+  }
 
   constructor(
     private authService: AuthService,
@@ -43,8 +48,8 @@ export class ChangePasswordComponent{
           res => {
             this.changePasswordSuccessMessage = "パスワードを更新しました";
             this.changePasswordErrorMessage = null;
-            this.oldPassword = null;
-            this.newPassword = null;
+            this.oldPassword = '';
+            this.newPassword = '';
           },
           error => {
             this.changePasswordErrorMessage = "パスワード更新に失敗しました";
