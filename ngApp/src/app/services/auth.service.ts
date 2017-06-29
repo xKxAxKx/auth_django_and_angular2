@@ -35,19 +35,6 @@ export class AuthService {
       });
   }
 
-  tokenRefresh() {
-    return this.http
-      .post(this.RefreshTokenUrl, this.jwt())
-      .map((response: Response) => {
-        let user = response.json();
-        if (user && user.token){
-          localStorage.setItem('auth_angular_user', JSON.stringify(user));
-          this.LoginToken = localStorage.getItem('auth_angular_user');
-          this.checkLogin();
-        }
-      });
-  }
-
   logout() {
     localStorage.removeItem('auth_angular_user');
     this.userLogin = false;
@@ -110,5 +97,17 @@ export class AuthService {
       let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': 'JWT ' + this.LoginToken.token });
       return new RequestOptions({ headers: headers });
     }
+  }
+
+  tokenRefresh() {
+    return this.http
+      .post(this.RefreshTokenUrl, this.LoginToken)
+      .map((response: Response) => {
+        let user = response.json();
+        if (user && user.token){
+          localStorage.setItem('auth_angular_user', JSON.stringify(user));
+          this.checkLogin();
+        }
+      });
   }
 }

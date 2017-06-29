@@ -137,6 +137,8 @@ JWT_AUTH = {
     # トークンの期限をここでは無効にしてみる
     'JWT_VERIFY_EXPIRATION': False,
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
+
+    'JWT_ALLOW_REFRESH': True,
 }
 
 REST_FRAMEWORK = {
@@ -153,5 +155,4 @@ REST_FRAMEWORK = {
     ),
     'NON_FIELD_ERRORS_KEY': 'detail',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
-    'JWT_ALLOW_REFRESH': True,
 }
