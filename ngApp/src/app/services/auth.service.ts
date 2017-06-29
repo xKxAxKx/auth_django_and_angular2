@@ -29,7 +29,6 @@ export class AuthService {
         let user = response.json();
         if (user && user.token){
           localStorage.setItem('auth_angular_user', JSON.stringify(user));
-          this.LoginToken = localStorage.getItem('auth_angular_user');
           this.checkLogin();
         }
       });
