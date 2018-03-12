@@ -49,7 +49,6 @@ class AuthInfoUpdateView(generics.UpdateAPIView):
     serializer_class = AccountSerializer
     queryset = Account.objects.all()
 
-    @transaction.atomic
     def get_object(self):
         try:
             instance = self.queryset.get(pk=self.request.user.uuid)
@@ -64,7 +63,6 @@ class AuthInfoDeleteView(generics.DestroyAPIView):
     serializer_class = AccountSerializer
     queryset = Account.objects.all()
 
-    @transaction.atomic
     def get_object(self):
         try:
             instance = self.queryset.get(pk=self.request.user.uuid)
