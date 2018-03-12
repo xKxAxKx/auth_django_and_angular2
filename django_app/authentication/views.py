@@ -12,6 +12,7 @@ from rest_framework.views import APIView
 from .serializer import AccountSerializer
 from .models import Account, AccountManager
 
+
 # ユーザ作成のView(POST)
 class AuthRegister(generics.CreateAPIView):
     permission_classes = (permissions.AllowAny,)
@@ -26,8 +27,9 @@ class AuthRegister(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 # ユーザ情報取得のView(GET)
-class AuthInfoGetView(generics.GenericAPIView):
+class AuthInfoGetView(generics.RetrieveAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
@@ -40,6 +42,7 @@ class AuthInfoGetView(generics.GenericAPIView):
             },
             status=status.HTTP_200_OK)
 
+
 # ユーザ情報更新のView(PUT)
 class AuthInfoUpdateView(generics.UpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -47,12 +50,14 @@ class AuthInfoUpdateView(generics.UpdateAPIView):
     lookup_field = 'email'
     queryset = Account.objects.all()
 
+    @transaction.atomic
     def get_object(self):
         try:
             instance = self.queryset.get(email=self.request.user)
             return instance
         except Account.DoesNotExist:
             raise Http404
+
 
 # ユーザ削除のView(DELETE)
 class AuthInfoDeleteView(generics.DestroyAPIView):
@@ -61,6 +66,7 @@ class AuthInfoDeleteView(generics.DestroyAPIView):
     lookup_field = 'email'
     queryset = Account.objects.all()
 
+    @transaction.atomic
     def get_object(self):
         try:
             instance = self.queryset.get(email=self.request.user)
