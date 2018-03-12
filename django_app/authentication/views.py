@@ -47,13 +47,12 @@ class AuthInfoGetView(generics.RetrieveAPIView):
 class AuthInfoUpdateView(generics.UpdateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AccountSerializer
-    lookup_field = 'email'
     queryset = Account.objects.all()
 
     @transaction.atomic
     def get_object(self):
         try:
-            instance = self.queryset.get(email=self.request.user)
+            instance = self.queryset.get(pk=self.request.user.uuid)
             return instance
         except Account.DoesNotExist:
             raise Http404
@@ -63,13 +62,12 @@ class AuthInfoUpdateView(generics.UpdateAPIView):
 class AuthInfoDeleteView(generics.DestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = AccountSerializer
-    lookup_field = 'email'
     queryset = Account.objects.all()
 
     @transaction.atomic
     def get_object(self):
         try:
-            instance = self.queryset.get(email=self.request.user)
+            instance = self.queryset.get(pk=self.request.user.uuid)
             return instance
         except Account.DoesNotExist:
             raise Http404

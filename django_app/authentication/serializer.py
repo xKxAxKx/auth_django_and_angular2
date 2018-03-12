@@ -9,7 +9,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ('id', 'username', 'email', 'profile', 'password')
+        fields = ('username', 'email', 'profile', 'password')
 
     def create(self, validated_data):
         return Account.objects.create_user(request_data=validated_data)
