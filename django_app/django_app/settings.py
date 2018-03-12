@@ -143,7 +143,7 @@ JWT_AUTH = {
 
 REST_FRAMEWORK = {
     # ページネーションの設定
-     'DEFAULT_PAGINATION_CLASS': (
+    'DEFAULT_PAGINATION_CLASS': (
         'rest_framework.pagination.LimitOffsetPagination'
     ),
     # JWTの認証設定
