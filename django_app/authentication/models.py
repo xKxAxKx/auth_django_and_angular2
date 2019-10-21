@@ -1,5 +1,4 @@
 import uuid as uuid_lib
-
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser, _user_has_perm
